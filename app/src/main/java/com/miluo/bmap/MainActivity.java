@@ -13,9 +13,15 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.MyLocationStyle;
 
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class MainActivity extends Activity {
     MapView mMapView = null;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private static final String[] LOCATION_PERMISSIONS = {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+    };
 
 
     @Override
@@ -29,9 +35,14 @@ public class MainActivity extends Activity {
 
         AMap aMap = mMapView.getMap();
         // 检查是否已经获得定位权限(ACCESS_FINE_LOCATION、ACCESS_COARSE_LOCATION)
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        // if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (!EasyPermissions.hasPermissions(this, LOCATION_PERMISSIONS)) {
             // 如果没有权限，则请求权限
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+            EasyPermissions.requestPermissions(this,
+                    "应用需要获取定位权限",
+                    MY_PERMISSIONS_REQUEST_LOCATION,
+                    LOCATION_PERMISSIONS);
+            // ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
         } else {
             // 如果已经有权限，则执行您的定位相关代码
 
