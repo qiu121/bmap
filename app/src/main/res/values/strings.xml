@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">bmap</string>
+    <string name="app_name">BMap</string>
+    <string name="confirm">确 认</string>
+    <string name="camera">相 机</string>
+    <string name="type">类型</string>
+    <string name="desc">描述</string>
+
 </resources>
